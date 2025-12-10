@@ -49,7 +49,7 @@
     \ClassError{\@classname}{The sffont option must be Helvetica.}}
 
 \define@choicekey*+{confpaper.cls}{ttfont}
-  [\confpaper@ttfont\confpaper@ttfont@nr]{nimbus,inconsolata}{}{%
+  [\confpaper@ttfont\confpaper@ttfont@nr]{nimbus,Menlo}{}{%
     \ClassError{\@classname}{The ttfont option must be Inconsolata, or Nimbus.}}
 
 % Font Size
@@ -70,13 +70,13 @@
       \ClassInfo{\@classname}{Conference format is ACM.}
       \presetkeys{confpaper.cls}{rmfont=libertine,
                                  sffont=libertine,
-                                 ttfont=inconsolata}{}
+                                 ttfont=Menlo}{}
       % TODO geometry
     \or
       \ClassInfo{\@classname}{Conference format is IEEE.}
       \presetkeys{confpaper.cls}{rmfont=times,
                                  sffont=helvetica,
-                                 ttfont=inconsolata}{}
+                                 ttfont=Menlo}{}
       % TODO geometry
     \or
       \ClassInfo{\@classname}{Conference format is IMC.}
@@ -94,7 +94,7 @@
       %   anonymization)
       \presetkeys{confpaper.cls}{rmfont=libertine,
                                  sffont=helvetica,
-                                 ttfont=inconsolata,
+                                 ttfont=Menlo,
                                  anonymous=false}{}
       \def\confpaper@columns{twocolumn}
       \def\confpaper@fontsize{10pt}
@@ -264,7 +264,7 @@
                 maxbibnames=99,%
                 citestyle=numeric-comp,%
                 natbib=true,%
-                backend=biber,
+                backend=bibtex,
                 mincrossrefs=1000]{biblatex}
 \setcounter{biburlnumpenalty}{9000}
 \setcounter{biburlucpenalty}{9000}
@@ -435,7 +435,7 @@
   \fi
 \or
   \ifxetex
-    \setmonofont[Scale=0.9]{inconsolata}
+    \setmonofont[Scale=0.9]{Menlo}
   \else
     \RequirePackage[scaled=0.9,varqu]{zi4}
   \fi
