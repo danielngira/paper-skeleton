@@ -1,9 +1,21 @@
 \section{Results}\label{sec:results}
 
-Our first step in performing this analysis was to determine the exact time that the outage occurred. We analyzed data from Georgia Tech’s IODA database and found that the outage occurred from around noon on October 29th (election day) to noon on November 1st. There was a brief 2-hour return of internet connectivity around noon on October 30th (a day after the elections), but the outage soon returned.
+Our first step in performing this analysis was to determine the exact time that the outage occurred. We analyzed data from Georgia Tech’s IODA database and found that the outage occurred from around noon on October 29th (election day) to noon on November 1st. In Figure~\ref{fig:ioda-timeseries}, we see there was a brief 2-hour return of internet connectivity around noon on October 30th (a day after the elections), but the outage soon returned.
 
-Figure~\ref{fig:ioda-timeseries}, connectivity drops sharply just
-after polls open.
+Internet activity on these graphs is naturally cyclical over the course of the day, as internet traffic typically downcycles during late night hours and upcycles during daylight hours. We can see that active probing and the number of unique source IPs completely craters at noon, which is typically when internet activity would reach its peak in Tanzania.
+
+Figure~\ref{fig:outage-score}, shows that the region that reported the highest outage score by IODA’s metrics was Dar-Es-Salaam, the largest city in Tanzania and a major financial hub in East Africa. We suspect that it is not necessarily because Dar-Es-Salaam was uniquely targeted for the shutdown, but rather because it is one of the areas in Tanzania with the highest level of internet usage. Figure~\ref{fig:regional-outages} shows the areas impacted by the outage in Tanzania.
+
+Kenya is a bordering East African country (in fact, bordering one of the regions in Tanzania that reported one of the highest outage reporting) but did not receive a similar disruption in the same time period. In the IODA article analyzing the veracity of the deep-sea cable claim for Kenya’s internet disruption last year, IODA mentions that they noticed a similar disruption in the internet service for Tanzania (which helps validate the claim that the PEACE and DARE cables were disrupted rather than internet service intentionally being shut down). However, figure~\ref{fig:regional-connectivity} shows that we did not observe a similarly major disruption in Kenya, Mozambique, or Somalia even though they’re connected via deep sea cables using \href{https://www.submarinecablemap.com/}{TeleGeography’s map}
+
+Our next step was to perform platform-specific connectivity testing using OONI, which mirrors the data trends seen in the IODA analysis. Regarding Twitter.com, figure~\ref{fig:twitter-test} shows a high volume of anomalies on election day. This was followed by an apparent post-election outage that resulted in a scarcity of test data and a substantial number of confirmed failures on November 3 and 4.
+
+We observed comparable patterns in the WhatsApp connectivity tests. Similar to the Twitter data, we detected a marked increase in anomalies on election day as we can see in figure~\ref{fig:whatsapp-test}. This instability persisted post-election, characterized by a significant volume of anomalies recorded from November 3 through November 5.
+
+A similar pattern emerges with Signal, a platform designed for private and secure communication. However, in this instance, we observed confirmed failures, in addition to anomalies as shown in figure~\ref{fig:signal-test}, both leading up to and on election day, culminating in a subsequent service outage
+
+
+
 
 \begin{figure}[t]
   \centering
@@ -12,3 +24,74 @@ after polls open.
   sharp drop in reachability consistent with a nationwide shutdown.}
   \label{fig:ioda-timeseries}
 \end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/outage_score}
+  \caption{A ranking of interaet outage scores per city in Tanzania}
+  \label{fig:outage-score}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/regional_outages}
+  \caption{A map of regional internet outages in East Africa}
+  \label{fig:regional-outages}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/twitter_test}
+  \caption{OONI data showing Twitter's connectivity in Tanzania from 20th November, 2025 - 7th Decemeber, 2025}
+  \label{fig:twitter-test}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/whatsapp_test}
+  \caption{OONI data showing WhatsApp's connectivity in Tanzania from 20th November, 2025 - 7th Decemeber, 2025}
+  \label{fig:whatsapp-test}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/signal_test}
+  \caption{OONI data showing Signal's connectivity in Tanzania from 20th November, 2025 - 7th Decemeber, 2025}
+  \label{fig:signal-test}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/kenya_connectivity}
+    \caption{Kenya}
+    \label{fig:kenya}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/mozambique_connectivity}
+    \caption{Mozambique}
+    \label{fig:mozambique}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/somalia_connectivity}
+    \caption{Somalia}
+    \label{fig:somalia}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/deepsea_cable}
+    \caption{Cable map}
+    \label{fig:cable-map}
+  \end{subfigure}
+
+  \caption{Regional connectivity around Tanzania's 2025 shutdown and the underlying cable topology.}
+  \label{fig:regional-connectivity}
+\end{figure}
+
+
